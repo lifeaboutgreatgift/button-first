@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Prototype Chain — Day 22</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="container">
+
+    <div class="header">
+      <h1>🔗 Prototype Chain Explorer</h1>
+      <p class="subtitle">Visualize how JavaScript looks up properties through the chain</p>
+    </div>
+
+    <!-- Chain visualizer -->
+    <div class="section">
+      <div class="section-label">👁 VISUALIZER</div>
+      <h2>Pick an object type</h2>
+      <p class="desc">See the full prototype chain for any JavaScript object</p>
+
+      <div class="type-buttons">
+        <button class="type-btn active" data-type="array">[ ] Array</button>
+        <button class="type-btn" data-type="string">" " String</button>
+        <button class="type-btn" data-type="object">{ } Object</button>
+        <button class="type-btn" data-type="function">ƒ Function</button>
+        <button class="type-btn" data-type="map">Map</button>
+        <button class="type-btn" data-type="set">Set</button>
+      </div>
+
+      <div class="chain-display" id="chain-display"></div>
+    </div>
+
+    <!-- Property lookup demo -->
+    <div class="section">
+      <div class="section-label">🔍 PROPERTY LOOKUP</div>
+      <h2>How JS finds a property</h2>
+      <p class="desc">Watch JavaScript walk up the chain searching for a property</p>
+
+      <div class="lookup-wrap">
+        <div class="lookup-controls">
+          <input type="text" id="lookup-prop" placeholder="Property name (e.g. map, toString, fly)" />
+          <button class="btn-primary" onclick="runLookup()">Search</button>
+        </div>
+        <div id="lookup-result" class="lookup-result"></div>
+      </div>
+    </div>
+
+    <!-- Build your own chain -->
+    <div class="section">
+      <div class="section-label">🏗 BUILD YOUR OWN</div>
+      <h2>Create a prototype chain</h2>
+      <p class="desc">Build Animal → Dog → instance and see inheritance in action</p>
+
+      <div class="build-wrap">
+        <div class="build-step">
+          <div class="step-label">Step 1 — Define Animal (base)</div>
+          <div class="code-block">
+            <span class="code-comment">// Animal has name + breathe()</span><br/>
+            Animal.breathe() → "<span id="breathe-output">click Run to see</span>"
+          </div>
+        </div>
+
+        <div class="arrow-down">↓ extends</div>
+
+        <div class="build-step">
+          <div class="step-label">Step 2 — Dog extends Animal</div>
+          <div class="code-block">
+            <span class="code-comment">// Dog inherits breathe(), adds bark()</span><br/>
+            Dog.bark() → "<span id="bark-output">click Run to see</span>"
+          </div>
+        </div>
+
+        <div class="arrow-down">↓ extends</div>
+
+        <div class="build-step">
+          <div class="step-label">Step 3 — Puppy extends Dog</div>
+          <div class="code-block">
+            <span class="code-comment">// Puppy inherits everything, adds play()</span><br/>
+            Puppy.play() → "<span id="play-output">click Run to see</span>"<br/>
+            Puppy.bark() → "<span id="puppy-bark-output">click Run to see</span>"<br/>
+            Puppy.breathe() → "<span id="puppy-breathe-output">click Run to see</span>"
+          </div>
+        </div>
+
+        <button class="btn-primary" onclick="runChainDemo()">▶ Run Chain Demo</button>
+
+        <div id="chain-log" class="chain-log"></div>
+      </div>
+    </div>
+
+    <!-- hasOwnProperty demo -->
+    <div class="section">
+      <div class="section-label">🏠 OWN vs INHERITED</div>
+      <h2>hasOwnProperty</h2>
+      <p class="desc">Check if a property truly belongs to the object or is inherited</p>
+
+      <div class="own-demo">
+        <div class="own-object">
+          <div class="own-label">const dog = {{ name: "Bruno", age: 3 }}</div>
+          <div class="own-props" id="own-props"></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
