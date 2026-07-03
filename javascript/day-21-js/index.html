@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Storage Explorer — Day 21</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="container">
+
+    <div class="header">
+      <h1>🗄️ Browser Storage Explorer</h1>
+      <p class="subtitle">Compare localStorage, sessionStorage, cookies and IndexedDB live</p>
+    </div>
+
+    <!-- Storage tabs -->
+    <div class="tabs">
+      <button class="tab active" data-tab="local">localStorage</button>
+      <button class="tab" data-tab="session">sessionStorage</button>
+      <button class="tab" data-tab="cookie">Cookies</button>
+      <button class="tab" data-tab="idb">IndexedDB</button>
+    </div>
+
+    <!-- Tab panels -->
+    <div class="panels">
+
+      <!-- localStorage panel -->
+      <div class="panel active" id="panel-local">
+        <div class="panel-info">
+          <span class="badge perm">Permanent</span>
+          <span class="badge size">~5MB</span>
+          <span class="badge noserver">Not sent to server</span>
+        </div>
+        <div class="input-row">
+          <input type="text" id="local-key" placeholder="Key" />
+          <input type="text" id="local-value" placeholder="Value" />
+          <button class="btn-add" onclick="addLocal()">Save</button>
+        </div>
+        <div class="storage-display" id="local-display"></div>
+        <button class="btn-clear" onclick="clearLocal()">Clear All</button>
+      </div>
+
+      <!-- sessionStorage panel -->
+      <div class="panel" id="panel-session">
+        <div class="panel-info">
+          <span class="badge temp">Tab Session</span>
+          <span class="badge size">~5MB</span>
+          <span class="badge noserver">Not sent to server</span>
+        </div>
+        <div class="panel-note">⚠️ Close this tab and reopen — data will be gone!</div>
+        <div class="input-row">
+          <input type="text" id="session-key" placeholder="Key" />
+          <input type="text" id="session-value" placeholder="Value" />
+          <button class="btn-add" onclick="addSession()">Save</button>
+        </div>
+        <div class="storage-display" id="session-display"></div>
+        <button class="btn-clear" onclick="clearSession()">Clear All</button>
+      </div>
+
+      <!-- Cookies panel -->
+      <div class="panel" id="panel-cookie">
+        <div class="panel-info">
+          <span class="badge server">Sent to server</span>
+          <span class="badge size">~4KB</span>
+          <span class="badge temp">Configurable expiry</span>
+        </div>
+        <div class="panel-note">🍪 Cookies are sent with every HTTP request to the server</div>
+        <div class="input-row">
+          <input type="text" id="cookie-key" placeholder="Name" />
+          <input type="text" id="cookie-value" placeholder="Value" />
+          <select title="cookies" id="cookie-expiry">
+            <option value="1">1 day</option>
+            <option value="7">7 days</option>
+            <option value="30">30 days</option>
+            <option value="365">1 year</option>
+          </select>
+          <button class="btn-add" onclick="addCookie()">Save</button>
+        </div>
+        <div class="storage-display" id="cookie-display"></div>
+        <button class="btn-clear" onclick="clearCookies()">Clear All</button>
+      </div>
+
+      <!-- IndexedDB panel -->
+      <div class="panel" id="panel-idb">
+        <div class="panel-info">
+          <span class="badge perm">Permanent</span>
+          <span class="badge size">Hundreds MB</span>
+          <span class="badge noserver">Not sent to server</span>
+        </div>
+        <div class="panel-note">💾 IndexedDB stores structured data — like a real database</div>
+        <div class="input-row">
+          <input type="text" id="idb-name" placeholder="Name" />
+          <input type="number" id="idb-age" placeholder="Age" />
+          <input type="text" id="idb-role" placeholder="Role" />
+          <button class="btn-add" onclick="addIDB()">Save</button>
+        </div>
+        <div class="storage-display" id="idb-display"></div>
+        <button class="btn-clear" onclick="clearIDB()">Clear All</button>
+      </div>
+
+    </div>
+
+    <!-- Comparison table -->
+    <div class="comparison">
+      <h2>Quick Comparison</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Feature</th>
+              <th>localStorage</th>
+              <th>sessionStorage</th>
+              <th>Cookies</th>
+              <th>IndexedDB</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Capacity</td>
+              <td>~5MB</td>
+              <td>~5MB</td>
+              <td>~4KB</td>
+              <td>Hundreds MB</td>
+            </tr>
+            <tr>
+              <td>Expires</td>
+              <td>Never</td>
+              <td>Tab close</td>
+              <td>Settable</td>
+              <td>Never</td>
+            </tr>
+            <tr>
+              <td>Sent to server</td>
+              <td class="no">No</td>
+              <td class="no">No</td>
+              <td class="yes">Yes</td>
+              <td class="no">No</td>
+            </tr>
+            <tr>
+              <td>API complexity</td>
+              <td class="good">Simple</td>
+              <td class="good">Simple</td>
+              <td class="warn">Clunky</td>
+              <td class="bad">Complex</td>
+            </tr>
+            <tr>
+              <td>Best for</td>
+              <td>Preferences</td>
+              <td>Temp data</td>
+              <td>Auth tokens</td>
+              <td>Offline apps</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
